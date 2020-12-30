@@ -17,7 +17,7 @@ module Api
 
 			private
 			def player_params
-				params.permit(:name, :total_experience, offer:[:id, :name, :base_experience])
+				params.permit(:name)
 			end
         end
 	end
