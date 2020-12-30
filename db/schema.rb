@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_130303) do
+ActiveRecord::Schema.define(version: 2020_12_30_185331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +32,16 @@ ActiveRecord::Schema.define(version: 2020_12_29_130303) do
     t.boolean "is_fair"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "player_id_1"
-    t.integer "player_id_2"
     t.string "offer_player_1", default: [], array: true
     t.string "offer_player_2", default: [], array: true
     t.integer "offer_1_experience"
     t.integer "offer_2_experience"
+    t.bigint "player_1_id", null: false
+    t.bigint "player_2_id", null: false
+    t.index ["player_1_id"], name: "index_trades_on_player_1_id"
+    t.index ["player_2_id"], name: "index_trades_on_player_2_id"
   end
 
+  add_foreign_key "trades", "players", column: "player_1_id"
+  add_foreign_key "trades", "players", column: "player_2_id"
 end
