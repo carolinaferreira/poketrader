@@ -3,7 +3,9 @@ module Api
 		class PokemonsController < ApplicationController   
 			def index
 				@pokemons = Pokemon.all
-				render json: {status: 'SUCCESS', message:'Loaded Pokemons', count: Pokemon.count, data:@pokemons},status: :ok
+				serializer = PokemonSerializer.new(@pokemons)
+				
+				render json: serializer.serialize_with_pagination(params[:page]), status: :ok
 			end
         end
 	end

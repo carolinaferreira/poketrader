@@ -3,7 +3,9 @@ module Api
 		class TradesController < ApplicationController   
 			def index
 				@trades = Trade.all
-				render json: {status: 'SUCCESS', message:'Loaded Trades', count: Trade.count, data:@trades},status: :ok
+				serializer = TradeSerializer.new(@trades)
+				
+				render json: serializer.serialize_with_pagination(params[:page]), status: :ok
             end
             
 
@@ -17,7 +19,8 @@ module Api
 				@trade['offer_2_experience'] = offer_2_experience
 				@trade['is_fair'] = calculate_is_fair(offer_1_experience, offer_2_experience)
 				if @trade.save
-					render json: {status: 'SUCCESS', message:'Saved trade', data: @trade},status: :ok
+					serializer = TradeSerializer.new(@trade)
+					render json: serializer.serialize, status: :created
 				else
 					render json: {status: 'ERROR', message:'Trade not saved', data: @trade.errors},status: :unprocessable_entity
 				end

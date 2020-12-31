@@ -3,13 +3,16 @@ module Api
 		class PlayersController < ApplicationController   
 			def index
 				@players = Player.all
-				render json: {status: 'SUCCESS', message:'Loaded Players', count: Player.count, data:@players},status: :ok
+				serializer = PlayerSerializer.new(@players)
+				
+				render json: serializer.serialize_with_pagination(params[:page]), status: :ok
 			end
 
 			def create
 				@player = Player.new(player_params)
 				if @player.save
-					render json: {status: 'SUCCESS', message:'Saved player', data: @player},status: :ok
+					serializer = PlayerSerializer.new(@player)
+					render json: serializer.serialize, status: :created	
 				else
 					render json: {status: 'ERROR', message:'Player not saved', data: @player.erros},status: :unprocessable_entity
 				end
