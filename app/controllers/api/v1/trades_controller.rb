@@ -2,7 +2,7 @@ module Api
 	module V1
 		class TradesController < ApplicationController   
 			def index
-				@trades = Trade.all
+				@trades = Trade.order('created_at DESC').all
 				serializer = TradeSerializer.new(@trades)
 				
 				render json: serializer.serialize_with_pagination(params[:page]), status: :ok

@@ -24,7 +24,11 @@ class TradeSerializer
         @relation = @relation.page(page) if page.present?
     
         {
-          records: @relation.as_json(only: TradeSerializer::FIELDS),
+          records: @relation.as_json(only: TradeSerializer::FIELDS,
+          include: {
+            player_1: {},
+            player_2: {}
+          }),
           pagination: page.present? ? pagination : nil
         }
       end
