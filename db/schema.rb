@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_12_30_185331) do
     t.boolean "is_fair"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "offer_player_1", default: [], array: true
-    t.string "offer_player_2", default: [], array: true
+    t.json "offer_player_1", default: [], array: true
+    t.json "offer_player_2", default: [], array: true
     t.integer "offer_1_experience"
     t.integer "offer_2_experience"
     t.bigint "player_1_id", null: false
