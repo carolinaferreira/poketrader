@@ -13,8 +13,8 @@ module Api
 				@trade = Trade.new(trade_params)
 				create_players
 
-				offer_1_experience = calculate_offer_experience(trade_params['offer_player_1'])
-				offer_2_experience = calculate_offer_experience(trade_params['offer_player_2'])
+				offer_1_experience = calculate_offer_experience(trade_params['offer_player_1'], 'offer_player_1' )
+				offer_2_experience = calculate_offer_experience(trade_params['offer_player_2'], 'offer_player_2')
 				@trade['offer_1_experience'] = offer_1_experience
 				@trade['offer_2_experience'] = offer_2_experience
 				@trade['is_fair'] = calculate_is_fair(offer_1_experience, offer_2_experience)
@@ -26,29 +26,30 @@ module Api
 				end
 			end
 
-			def calculate_offer_experience(offer_player)
+			def calculate_offer_experience(offer_player, trade_offer)
 				offer_experience = 0
-				
-				offer_player.each do |pokemon|
+
+				offer_array = Pokemon.where(name: offer_player)
+
+				offer_array.each do |pokemon|
 					offer_experience += pokemon['base_experience'].to_i
 				end
 
-				puts "Total experience 1: #{offer_experience}"
+				@trade[trade_offer] = offer_array
 				offer_experience
 			end
 
 			def calculate_is_fair(offer_1_experience, offer_2_experience)
 				is_fair = (offer_1_experience - offer_2_experience).abs >= 2
 
-				puts is_fair
 				is_fair
 			end
 
 			private
 			def trade_params
 				params.permit(
-					offer_player_1: [[:id, :name, :base_experience]],
-					offer_player_2: [[:id, :name, :base_experience]])
+					offer_player_1: [],
+					offer_player_2: [])
 			end
 
 			def create_players
