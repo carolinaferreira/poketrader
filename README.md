@@ -1,24 +1,32 @@
-# README
+<h1 align="center">Welcome to PokeTrader API 👋</h1>
+<p>
+</p>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> API that allows pokemon exchanges between two players.
 
-Things you may want to cover:
+## Install
 
-* Ruby version
+```sh
+bundle install
+```
 
-* System dependencies
+## Usage
 
-* Configuration
+```sh
+rails s -p 3001
+```
 
-* Database creation
+## Author
 
-* Database initialization
+👤 **Carolina Ferreira**
 
-* How to run the test suite
+* Website: https://github.com/carolinaferreira
+* Github: [@carolinaferreira](https://github.com/carolinaferreira)
+* LinkedIn: [@ferreira-carolina](https://linkedin.com/in/ferreira-carolina)
 
-* Services (job queues, cache servers, search engines, etc.)
+## Show your support
 
-* Deployment instructions
+Give a ⭐️ if this project helped you!
 
-* ...
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
