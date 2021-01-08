@@ -1,18 +1,9 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username:
-  password: 
-  timeout: 5000
+  adapter: <%= ENV['DATABASE_ADAPTER']||'postgresql' %>
+  encoding: <%= ENV['DATABASE_ENCODE']||'UTF-8' %>
+  pool: <%= ENV['DATABASE_POOL'] || '5' %>
+  timeout: <%= ENV['DATABASE_TIMEOUT'] || '5000' %>
 
-development:
-  <<: *default
-  database: poketrader_dev
-test:
-  <<: *default
-  database: poketrader_test
-
-production:
-  <<: *default
-  database: poketrader
+test: <%= ENV['DATABASE_URL']%>
+development: <%= ENV['DATABASE_URL']%>
+production: <%= ENV['DATABASE_URL']%>

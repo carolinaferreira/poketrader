@@ -5,8 +5,10 @@ require_relative "config/application"
 
 Rails.application.load_tasks
 
-begin
-    require 'minitest/autorun'
-  rescue LoadError => e
-    raise e unless ENV['RAILS_ENV'] == "production"
+Rake::Task["yarn:install"].clear
+
+namespace :yarn do
+  task :install do
+    # Do nothing, since there's no yarn
   end
+end
