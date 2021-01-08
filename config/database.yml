@@ -6,4 +6,6 @@ default: &default
 
 test: <%= ENV['DATABASE_URL']%>
 development: <%= ENV['DATABASE_URL']%>
-production: <%= ENV['DATABASE_URL']%>
+production:
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL']%>
