@@ -9,6 +9,11 @@
 ```sh
 bundle install
 ```
+## Database
+
+```sh
+rails db:create db:migrate db:seed
+```
 
 ## Usage
 
