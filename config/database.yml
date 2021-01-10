@@ -1,11 +1,18 @@
 default: &default
   adapter: <%= ENV['DATABASE_ADAPTER']||'postgresql' %>
   encoding: <%= ENV['DATABASE_ENCODE']||'UTF-8' %>
-  pool: <%= ENV['DATABASE_POOL'] || '5' %>
+  pool:  <%= ENV['DATABASE_POOL'] || '5' %>
   timeout: <%= ENV['DATABASE_TIMEOUT'] || '5000' %>
+  username: carolina
+  password:
 
-test: <%= ENV['DATABASE_URL']%>
-development: <%= ENV['DATABASE_URL']%>
+development:
+  <<: *default
+  database: poketrader_dev
+test:
+  <<: *default
+  database: poketrader_test
+
 production:
   adapter: postgresql
   url: <%= ENV['DATABASE_URL']%>
